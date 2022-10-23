@@ -6,7 +6,7 @@
 /*   By: dabey <dabey@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:05:27 by dabey             #+#    #+#             */
-/*   Updated: 2022/10/21 20:45:23 by dabey            ###   ########.fr       */
+/*   Updated: 2022/10/23 16:20:32 by dabey            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(void)
 	}
 	return (0);
 }
-//test     "coucou" bonjour "salut ca va?"    oui "super     moi | aussi"    "yes
+
 
 	// list = ft_init(list);
 	//if (strcmp(cmd[i], "exit") == 0)
