@@ -14,6 +14,7 @@ CFLAGS			= -Wall -Werror -Wextra
 
 $(NAME)			:	${OBJS}
 					${CC} ${OBJS} -o ${NAME} -lreadline
+					# x-terminal-emulator -f -T Minishell -x ./minishell
 
 all				:	${NAME}
 
