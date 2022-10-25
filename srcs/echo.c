@@ -58,16 +58,45 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (dest);
 }
 
+int		lineisn(char *line)
+{
+	int	i;
+
+	i = 1;
+	if(line[0] != '-')
+		return (0);
+	while(line[i])
+	{
+		if(line[i] != 'n')
+			return (0);
+		else
+			i++;
+	}
+	return (1);
+}
+
+int		checkn(char **line)
+{
+	int	i;
+
+	i = 1;
+	while(lineisn(line[i]) == 1)
+		i++;
+	return (i - 1);
+}
+
 void    built_in_echo(char **line, int linelength /*nombre de strings dans line*/)
 {
     int     i;
     char    *join;
     int     oops; // a enlever
+	int		check;
 
     oops = 0; //a enlever
     i = 0;
-    if (ft_strcmp(line[1], "-n") == 0)
-        i++;
+	check = checkn(line);
+    if (check > 0)
+        i += check;
     else
     {
         join = line[linelength - 1];
