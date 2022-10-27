@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:16:39 by tlebouvi          #+#    #+#             */
-/*   Updated: 2022/10/26 20:49:05 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/10/27 22:59:31 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		soloarg(char **argv, char **env, t_pipe *pipex)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **env)
+int		main(int argc, char **argv, char **env)
 {
 	t_pipe	pipex;
 	int		pipefd[2];
@@ -86,6 +86,7 @@ int	main(int argc, char **argv, char **env)
 
 /**
 
+CHERCHER NORMINETTE ADDON SUR VSCODE
 
 ./pipex infile cat cat cat /de/stdout
 ->avec infile qui existe
