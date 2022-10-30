@@ -5,7 +5,13 @@
 //  3  5 21 infile
 //  6 10 42 total
 
-
+// e2r11p15% < infile wc >> infile
+// e2r11p15% cat infile 
+// salut
+// ca va?
+// oui oui
+//  3  5 21
+// e2r11p15% < infile wc > infile 
 
 
 
@@ -24,13 +30,7 @@ arguments de main ->
                         - structure
                         - liste env
 
-
-
-
-
-
-
-                                POUR EXECUTER UNE SEULE COMMANDE SANS PIPE
+                        POUR EXECUTER UNE SEULE COMMANDE SANS PIPE
 
 
 
@@ -49,7 +49,7 @@ MAIN
         -> Sistdin et stdout ne sont pas modifies -> utiliser STDIN STDOUT classiques
 
     2. Verifier que la commande a executer soit un Built-In ou non.
-        -> Parser la ligne de commande  la recherche d'un builtin (infos grace au lexer?) 
+        -> Parser la ligne de commande  la recherche d'un builtin (infos grace au lexer?)
         -> Normalement il  ne devrait pas y avoir d'erreur d'argument
         -> si un builtin est present executer la fonction associee
             -> la fonction du buildin est executee et on Exit (Sauf si Pipe)
