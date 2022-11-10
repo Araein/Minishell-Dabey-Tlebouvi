@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:05:27 by dabey             #+#    #+#             */
-/*   Updated: 2022/11/09 19:30:03 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:42:36 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	main( int argc, char **argv, char **env)
 	while ((buffer = readline("Minishell$> ")) > 0 && ft_strcmp(buffer, "exit") != 0)
 	{
 		add_history(buffer);
-	//	printf("buffer = %s\n", buffer);
 		if(buffer[0] == '$')
 		{
 			tempo = NULL;
@@ -107,20 +106,16 @@ int	main( int argc, char **argv, char **env)
 		
 		if(ft_strcmp(buffer, "env") == 0)
 		{
-			printlist(envlist);///////////
-			//envlist = ft_add_env(envlist, "COUCOU");
+			printlist(envlist);
 		}
-		if(buffer[0] == 'u' && buffer[1] == 'n' && buffer[2] == 's' && buffer[3] == 'e' && buffer[4] == 't')
-		{
+		if(buffer[0] == 'u' && buffer[1] == 'n' && buffer[2] == 's' && buffer[3] == 'e' &&
+		 buffer[4] == 't' && buffer[5] == ' ')
 			envlist = unset_line(buffer, envlist);
-			//envlist = ft_add_env(envlist, "COUCOU");
   
-		}
-		if(buffer[0] == '!')
-		{
-			/*envlist = */built_in_export(envlist, buffer);//////////
-			//printlist(envlist);
-		}
+		if(buffer[0] == 'e' && buffer[1] == 'x' && buffer[2] == 'p' && buffer[3] == 'o' &&
+		 buffer[4] == 'r' && buffer[5] == 't' && buffer[6] == ' ')
+			envlist = built_in_export(envlist, buffer);//////////
+
 		i = 0;
 		// parse_quote(buffer, list);
 		str_cmd = ft_split(buffer, '|');

@@ -8,33 +8,36 @@ si =  -> ajoute dans env tout l'argument
 si plusieurs =   -> ne prends que a partir du premier
 
 */
+
+int searchequal(char *line)
+{
+    int i;
+
+    i = 1;
+  //  printf("lines dans searchequal = %s\n", line);
+    while(line[i])
+    {
+        if(line[i] == '=')  //checker double ==  colle ou non, = a la fin et = au debut
+            return (1);
+        i++;
+    }
+  //  printf("lines error dans searchequal = %s\n", line);
+    return (0);
+}
+
 t_envlist *built_in_export(t_envlist *envlist, char *line)
 {
-    t_envlist   *tempo;
-    char        **command;
-    char        **test;
+    char        **variables;
     int         i;
-    int         j;
 
-    j = 0;
-    i = 0;
-    tempo = envlist;
-    command = ft_split(line, ' ');
-    while(command[i])
+    i = 1;
+    variables = ft_split(line, ' ');
+    while(variables[i])
     {
-        test = ft_split(command[i], '=');
-        while(test[j])
-            j++;
-       // printf("J = .%d. command = .%s.\n", j, command[i]);
-       printf("commande[i] = .%s.\n", command[i]);
-        if(j == 2)
-            envlist = ft_add_env(envlist, command[i]);
-        //printlist(envlist);
-        j = 0;
+        if(searchequal(variables[i]))
+            envlist = ft_add_env(envlist, variables[i]);
         i++;
-        freetab(test);
     }
-    freetab(command);
-    //printlist(envlist);
+    freetab(variables);
     return (envlist);
 }

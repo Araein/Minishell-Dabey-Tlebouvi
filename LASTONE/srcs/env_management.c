@@ -58,7 +58,7 @@ t_envlist	*ft_add_env(t_envlist *list, char *line)
 	head = NULL;
 	//printf("Line = .%s.\n", line);
 	new = ft_new_envnode(line);
-//	printf("newLine = .%s.\n", new->line);
+	//printf("newLine = .%s.\n", new->line);
 	if (!(list))
 		list = new;
 	else
@@ -99,10 +99,13 @@ t_envlist *make_env(char **env)
 	while (env[i])
 	{
         envlist = ft_add_env(envlist, env[i]);
-//		printf("%s\n", env[i]);
 		i++;
 	}
-  //  printlist(envlist);
+	envlist = ft_add_env(envlist, env[i]);
+	envlist = ft_add_env(envlist, env[i]);
+	envlist = ft_add_env(envlist, env[i]);
+	envlist = ft_add_env(envlist, env[i]);
+
     //segfault si il n'y a pas d'env a recup attention
     return (envlist);
 }
