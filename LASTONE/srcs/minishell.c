@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:05:27 by dabey             #+#    #+#             */
-/*   Updated: 2022/11/10 16:42:36 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:32:44 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	freetab(char **tab)
 	if (tab)
 		free(tab);
 }
+
 void	free_list(t_list *list)
 {
 	t_list	*tmp;

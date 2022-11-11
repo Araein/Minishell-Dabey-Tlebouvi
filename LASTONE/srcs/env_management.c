@@ -101,11 +101,6 @@ t_envlist *make_env(char **env)
         envlist = ft_add_env(envlist, env[i]);
 		i++;
 	}
-	envlist = ft_add_env(envlist, env[i]);
-	envlist = ft_add_env(envlist, env[i]);
-	envlist = ft_add_env(envlist, env[i]);
-	envlist = ft_add_env(envlist, env[i]);
-
     //segfault si il n'y a pas d'env a recup attention
     return (envlist);
 }
