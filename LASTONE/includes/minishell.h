@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:47:59 by dabey             #+#    #+#             */
-/*   Updated: 2022/11/09 19:20:05 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:32:35 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	enum	e_type
 typedef struct envlist
 {
     char 			*line;
+	int				created;
     struct	envlist *next;
 }	t_envlist;
 
@@ -53,8 +54,7 @@ int		ft_strcmp(char *s1, char *s2);
 void	freetab(char **tab);
 //***********************env************************
 t_envlist	*make_env(char **env);
-t_envlist	*ft_add_env(t_envlist *list, char *line);
-t_envlist	*ft_new_envnode(char *line);
+t_envlist	*ft_add_env(t_envlist *list, char *line, int created);
 void  		printlist(t_envlist *list);
 t_envlist	*get_env_line(t_envlist *envlist, char *line);
 
@@ -64,6 +64,10 @@ t_envlist   *unset_line(char *buffer,t_envlist *envlist);
 char		*ft_substr(char const *s, unsigned int start, int len);
 t_envlist	*findline(t_envlist *envlist, char *line);
 int			ft_strlen(const char *s);
+
+void	free_list_env(t_envlist *list);
+t_envlist *make_env(char **env);
+int	ft_strlen(const char *s);
 
 
 

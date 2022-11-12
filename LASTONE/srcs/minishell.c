@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:05:27 by dabey             #+#    #+#             */
-/*   Updated: 2022/11/11 14:32:44 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:20:17 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int	main( int argc, char **argv, char **env)
 			tmp = tmp->next;
 		}
 	}
+	free_list_env(envlist);
 	printf("exit : Good bye\n");
 	free_list(list);
 	return (0);
