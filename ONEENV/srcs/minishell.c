@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:05:27 by dabey             #+#    #+#             */
-/*   Updated: 2022/11/22 16:41:10 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/11/22 21:24:40 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_list	*ft_add_node(t_list *list, char *cmd_i, char *buffer)
 
 int	main(int argc, char **argv, char **env)
 {
-	int			j;
+	//int			j;
 	int			i;
 	t_list		*list;
 	t_list		*tmp;
@@ -134,7 +134,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(buffer);
 		tmp = list;
-		while (tmp != 0)
+		/*while (tmp != 0)
 		{
 			printf("\n\nnew\n");
 			j = 0;
@@ -144,7 +144,7 @@ int	main(int argc, char **argv, char **env)
 				j++;
 			}
 			tmp = tmp->next;
-		}
+		}*/
 		freetab(str_cmd);
 		free_list(list);
 		list = NULL;

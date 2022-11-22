@@ -1,9 +1,8 @@
 #include "../includes/minishell.h"
 
-
 int	ft_strncmp(const char *s1, const char *s2, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (n == 0)
@@ -16,12 +15,13 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*answer;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!s || len <= 0 || start >= (unsigned int)ft_strlen(s))
 		return (NULL);
-	if (!(answer = malloc(sizeof(char) * len + 1)))
+	answer = malloc(sizeof(char) * len + 1);
+	if (answer == NULL)
 		return (NULL);
 	while (s[start] && i < len)
 	{
@@ -33,17 +33,17 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 	return (answer);
 }
 
-int whereend(char *line)
+int	whereend(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(line[i])
-    {
-        if(line[i] == '=' || line[i] == '\0')
-            return (i);
-        i++;
-    }
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '=' || line[i] == '\0')
+			return (i);
+		i++;
+	}
 	return (i);
 }
 
@@ -53,23 +53,23 @@ t_envlist	*findline(t_envlist *envlist, char *line)
 	int		lenline;
 
 	lenline = ft_strlen(line);
-	while(envlist != NULL && envlist->next != NULL)
-    {    
-		i = 0;
-		while(envlist->line[i + 11] && envlist->line[i + 11] == line[i + 1])
-			i++;
-		if(i == lenline - 1 && i == whereend(envlist->line) - 11)
-			return(envlist);
-		else
-			envlist = envlist->next;
-    }
-	if(envlist)
+	while (envlist != NULL && envlist->next != NULL)
 	{
 		i = 0;
-		while(envlist->line[i + 11] && envlist->line[i + 11] == line[i + 1])
+		while (envlist->line[i + 11] && envlist->line[i + 11] == line[i + 1])
 			i++;
-		if(i == lenline - 1 && i == whereend(envlist->line) - 11)
-			return(envlist);
+		if (i == lenline - 1 && i == whereend(envlist->line) - 11)
+			return (envlist);
+		else
+			envlist = envlist->next;
+	}
+	if (envlist)
+	{
+		i = 0;
+		while (envlist->line[i + 11] && envlist->line[i + 11] == line[i + 1])
+			i++;
+		if (i == lenline - 1 && i == whereend(envlist->line) - 11)
+			return (envlist);
 	}
 	return (NULL);
 }
@@ -79,12 +79,14 @@ char	*cutline(char *line)
 	int	i;
 
 	i = 0;
-	if(line == NULL)
+	if (line == NULL)
 		return (NULL);
-	while(line[i] && line[i] != '=')
+	while (line[i] && line[i] != '=')
 		i++;
-	return(ft_substr(line, i + 1, ft_strlen(line) - i)); //gerer un retour NULL? renvoyer ""
-}  ///attention retour null probablement pas gere partout
+	return (ft_substr(line, i + 1, ft_strlen(line) - i));
+}
+//gerer un retour NULL? renvoyer "" 
+//attention retour null probablement pas gere partout
 
 t_envlist	*get_env_line(t_envlist *envlist, char *line)
 {
@@ -95,13 +97,13 @@ t_envlist	*get_env_line(t_envlist *envlist, char *line)
 	lenline = ft_strlen(line);
 	tempo = envlist;
 	envlist = findline(envlist, line);
-	if(envlist)
+	if (envlist)
 	{
 		lineresult = cutline(envlist->line);
 		printf("LINERESULT = %s\n", lineresult);
-        free(lineresult);
+		free(lineresult);
 	}
 	return (envlist);
-	//verifier cas avec plusieurs = ou sans = ?? ou  = des le debut ou des la fin
-    //segfault si $shell (existe pas)
 }
+//verifier cas avec plusieurs = ou sans = ?? ou  = des le debut ou des la fin
+//segfault si $shell (existe pas)

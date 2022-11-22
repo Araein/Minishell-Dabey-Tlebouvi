@@ -20,13 +20,14 @@ char	*ft_strrchr(const char *str, int tsearched)
 	while (i < ft_strlen(str))
 	{
 		if (str[ft_strlen(str) - i] == searched)
-			return ((char*)&str[ft_strlen(str) - i]);
+			return ((char *)&str[ft_strlen(str) - i]);
 		i++;
 	}
 	if (str[ft_strlen(str) - i] == searched)
-		return ((char*)&str[ft_strlen(str) - i]);    ///FAIRE ATTENTION A BIEN TESTER TOUS LES CAS
+		return ((char *)&str[ft_strlen(str) - i]);
 	return (0);
 }
+///FAIRE ATTENTION A BIEN TESTER TOUS LES CAS
 
 char	*ft_strndup(const char *str, int n)
 {
@@ -45,7 +46,6 @@ char	*ft_strndup(const char *str, int n)
 	dest[i] = '\0';
 	return (dest);
 }
-
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -76,48 +76,39 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 //implementer la possibilite d'unset plusieurs variables d'un coup !!!!
 
-t_envlist    *unset_line(char *buffer, t_envlist *envlist)
+t_envlist	*unset_line(char *buffer, t_envlist *envlist)
 {
-    char        *tempo;
-    t_envlist   *tempolist;
-    t_envlist   *goodlist;
-    t_envlist   *firstlist;
+	char		*tempo;
+	t_envlist	*tempolist;
+	t_envlist	*goodlist;
+	t_envlist	*firstlist;
 
-    firstlist = envlist;
-
-//TROUVER LA BONNE LIGNE
-    tempo = ft_strjoin ("$", buffer);
-    goodlist = findline(envlist, tempo);
-    free(buffer);
-    free(tempo);
-    if(goodlist == NULL)
-        return(firstlist);
-    // if(type == 3)
-    // {
-    //     if(searchequal(goodlist->line) >= 1)
-    //         return(NULL);  //atention faire des tests ou firstlist = NULL
-    //     type = 1;
-    // }
-//ENLEVER LA LIGNE EN QUESTION
-    if(envlist == goodlist)
-    {
-        tempolist = envlist;
-        if(envlist->created == 1)
-            free(envlist->line);
-        envlist = envlist->next;
-        free(tempolist);
-        return (envlist);
-    }
-    while(envlist->next && envlist->next != goodlist)
-        envlist = envlist->next;
-    if(envlist->next == goodlist)
-    {
-        tempolist = envlist->next;
-        if(envlist->next->created == 1)
-            free(envlist->next->line);
-        envlist->next = envlist->next->next;
-        free(tempolist);
-        return (firstlist);
-    }
-    return(firstlist);
+	firstlist = envlist;
+	tempo = ft_strjoin ("$", buffer);
+	goodlist = findline(envlist, tempo);
+	free(buffer);
+	free(tempo);
+	if (goodlist == NULL)
+		return (firstlist);
+	if (envlist == goodlist)
+	{
+		tempolist = envlist;
+		if (envlist->created == 1)
+			free(envlist->line);
+		envlist = envlist->next;
+		free(tempolist);
+		return (envlist);
+	}
+	while (envlist->next && envlist->next != goodlist)
+		envlist = envlist->next;
+	if (envlist->next == goodlist)
+	{
+		tempolist = envlist->next;
+		if (envlist->next->created == 1)
+			free(envlist->next->line);
+		envlist->next = envlist->next->next;
+		free(tempolist);
+		return (firstlist);
+	}
+	return (firstlist);
 }

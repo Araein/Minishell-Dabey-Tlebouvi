@@ -1,13 +1,14 @@
-
 #include "../includes/minishell.h"
 
 t_envlist	*ft_new_envnode(char *line, int created)
 {
 	t_envlist	*new;
 
+	if (line == NULL)
+		return (NULL);
 	new = (t_envlist *)malloc(sizeof(t_envlist));
 	if (!new)
-		return (NULL); //proteger
+		return (NULL);
 	new->line = line;
 	new->created = created;
 	new->next = NULL;
@@ -21,6 +22,12 @@ t_envlist	*ft_add_env(t_envlist *list, char *line, int created)
 
 	head = NULL;
 	new = ft_new_envnode(line, created);
+	if (new == NULL)
+	{
+		if (line)
+			free(line);
+		return (NULL);
+	}
 	if (!(list))
 		list = new;
 	else
@@ -32,26 +39,28 @@ t_envlist	*ft_add_env(t_envlist *list, char *line, int created)
 	}
 	return (list);
 }
+
 void	printlistenv(t_envlist *list)
 {
 	t_envlist	*tempo;
 	int			l;
 	char		*tempoline;
-
+	int			equal;
 
 	tempo = list;
-	while(list != NULL && list->next != NULL)
+	while (list != NULL && list->next != NULL)
 	{
-		if(list->line)
+		if (list->line)
 		{
 			l = ft_strlen(list->line);
-			tempoline = ft_substr(list->line, 11, l - (l - searchequal(list->line)) - 9);
-			if(tempoline)
+			equal = searchequal(list->line);
+			tempoline = ft_substr(list->line, 11, l - (l - equal) - 9);
+			if (tempoline)
 			{
 				printf("%s", tempoline);
-				free(tempoline); //verifier aue ca ne leak pas
-				tempoline = ft_substr(list->line, searchequal(list->line) + 3, l - (searchequal(list->line) + 4));
-				if(tempoline)
+				free(tempoline);
+				tempoline = ft_substr(list->line, equal + 3, l - (equal + 4));
+				if (tempoline)
 				{
 					printf("%s", tempoline);
 					free(tempoline);
@@ -62,82 +71,93 @@ void	printlistenv(t_envlist *list)
 		list = list->next;
 	}
 	if (list != NULL && list->line)
+	{
+		l = ft_strlen(list->line);
+		equal = searchequal(list->line);
+		tempoline = ft_substr(list->line, 11, l - (l - equal) - 9);
+		if (tempoline)
 		{
-			l = ft_strlen(list->line);
-			tempoline = ft_substr(list->line, 11, l - (l - searchequal(list->line)) - 9);
-			if(tempoline)
+			printf("%s", tempoline);
+			free(tempoline);
+			tempoline = ft_substr(list->line, equal + 3, l - (equal + 4));
+			if (tempoline)
 			{
 				printf("%s", tempoline);
-				free(tempoline); //verifier aue ca ne leak pas
-				tempoline = ft_substr(list->line, searchequal(list->line) + 3, l - (searchequal(list->line) + 4));
-				if(tempoline)
-				{
-					printf("%s", tempoline);
-					free(tempoline);
-				}
-				printf("\n");
+				free(tempoline);
 			}
+			printf("\n");
 		}
+	}
 	list = tempo;
 }
 
-void    printlist(t_envlist *list, int type)
+void	printlist(t_envlist *list, int type)
 {
-    t_envlist *tempo;
+	t_envlist	*tempo;
 
-	if(type == 0)
+	if (type == 0)
 		printlistenv(list);
 	else
 	{
 		tempo = list;
-		while(list != NULL && list->next != NULL)
+		while (list != NULL && list->next != NULL)
 		{
-			if(list->line)
+			if (list->line)
 				printf("%s\n", list->line);
 			list = list->next;
 		}
 		if (list != NULL)
 			printf("%s\n", list->line);
 		list = tempo;
-    }   //segfault si il n'y a pas d'env a recup attention
+	}
 }
+//segfault si il n'y a pas d'env a recup attention
 
-t_envlist *make_env(char **env)
+t_envlist	*make_env(char **env)
 {
-	int	i;
-    char		*addquoteline;
-	t_envlist   *envlist;
+	int			i;
+	char		*addquoteline;
+	t_envlist	*envlist;
 
 	i = 0;
 	envlist = NULL;
+	if (env[i] == NULL)
+		return (NULL);
 	while (env[i])
 	{
 		addquoteline = addquote(env[i]);
-		envlist = ft_add_env(envlist, ft_strjoin("declare -x ", addquoteline), 1);   //gerer si le join retourne NULL
+		envlist = ft_add_env(envlist,
+				ft_strjoin("declare -x ", addquoteline), 1);
 		free(addquoteline);
 		i++;
 	}
-    //segfault si il n'y a pas d'env a recup attention
-    return (envlist);
+	return (envlist);
 }
-
+//segfault si il n'y a pas d'env a recup attention
 
 void	free_list_env(t_envlist *list)
 {
 	t_envlist	*tmp;
 
-	while (list->next != NULL)
+	if (list)
 	{
-		if(list->created == 1)
+		while (list->next != NULL)
+		{
+			if (list->created == 1)
+				free(list->line);
+			tmp = list;
+			list = list->next;
+			free(tmp);
+		}
+		if (list->created == 1)
 			free(list->line);
-		tmp = list;
-		list = list->next;
-		free(tmp);
+		free(list);
 	}
-	if(list->created == 1)
-		free(list->line);
-	free(list);
 }
+
+
+//export yesssssss testencore=oui ===non 64663 non=oui
+
 
 /*
 To do list :
