@@ -54,7 +54,7 @@ t_envlist *built_in_export(t_envlist *envlist, char *line)
 			{
 				printf("bash: export: `%s': not a valid identifier\n",
 					variables[i]);
-				//changer le retour d'erreur? // fonctione avec _ ? et $truc ?
+				//changer le retour d'erreur? // fonctione avec _ ? et $truc 
 			}
 			else if (searchequal(variables[i]))
 			{

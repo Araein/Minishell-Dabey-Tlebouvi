@@ -6,7 +6,7 @@
 /*   By: tlebouvi <tlebouvi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 17:05:27 by dabey             #+#    #+#             */
-/*   Updated: 2022/11/22 21:24:40 by tlebouvi         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:42:02 by tlebouvi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int argc, char **argv, char **env)
 		add_history(buffer);
 		if (check_basic_error(buffer) != 1)
 			return (0);
-		str_cmd = ft_split_quote(buffer, '|');
+		//str_cmd = ft_split_quote(buffer, '|');
 		// int k = 0;
 		// while (str_cmd[k])
 		// {
@@ -108,11 +108,11 @@ int	main(int argc, char **argv, char **env)
 		// 	k++;
 		// }
 		i = 0;
-		while(str_cmd[i] != 0)
-		{
-			list = ft_add_node(list, str_cmd[i], buffer);
-			i++;
-		}
+		// while(str_cmd[i] != 0)
+		// {
+		// 	list = ft_add_node(list, str_cmd[i], buffer);
+		// 	i++;
+		// }
 		if(buffer[0] == '$')
 		{
 			tempo = NULL;
@@ -145,12 +145,12 @@ int	main(int argc, char **argv, char **env)
 			}
 			tmp = tmp->next;
 		}*/
-		freetab(str_cmd);
-		free_list(list);
+	//	freetab(str_cmd);
+		// free_list(list);
 		list = NULL;
         }
         // free_history_entry();
-		free_list_env(envlist);    //attention invalid free ?
+		free_list_env(envlist);
         printf("exit : Good bye\n");
         // free_list(list);
         return (0);
